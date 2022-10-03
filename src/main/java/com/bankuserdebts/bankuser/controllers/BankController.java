@@ -37,8 +37,6 @@ public class BankController {
     @PathVariable long debtId) {
 
     return bankService.registerDebtToUser(BankId, debtId);
-
-
   }
  
   @GetMapping("/api/v1/bank/{BankId}/debts")

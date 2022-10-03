@@ -51,7 +51,6 @@ public class BankUserApplication implements CommandLineRunner {
 		userRepository.save(user3);
 		bankRepository.save(bank);
 		Bank stateBank = bankRepository.save(bank2);
-		System.out.println("Bank saved?"+stateBank.getId()+stateBank.getId());
 		Thread.sleep(50);
 		// bankService.registerBankToUser(stateBank.getId(), stateUser.getId());
 		bankService.registerBankToUser(1L, 1L);
