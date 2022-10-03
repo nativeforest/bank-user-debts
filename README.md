@@ -6,9 +6,12 @@ Project using Java SpringBoot, H2 y JPA
 #Tools and version used
 
 Java version: 11
-Database: h2database
-sprijng boot starter parent : 2.7.4
-IDLE: Visual Code
+<br /> 
+Database: h2database 
+<br />
+sprijng boot starter parent : 2.7.4 
+<br />
+IDLE: Visual Code 
 
 # DB
 At the start of the project,H2 memory database runs inside CommandLineRunner, so check the database state via http://localhost:8080/h2-console/
