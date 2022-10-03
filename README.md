@@ -14,10 +14,14 @@ sprijng boot starter parent : 2.7.4
 IDLE: Visual Code 
 
 # DB
-At the start of the project,H2 memory database runs inside CommandLineRunner, so check the database state via http://localhost:8080/h2-console/
-with credentials
-username: sa
-password: password
+At the start of the project,H2 memory database runs inside CommandLineRunner, so check the database state via http://localhost:8080/h2-console/ , with the next credentials
+
+Saved Settings: Generic H2 (Embedded) 
+Setting Name: Generic H2 (Embedded) 
+Driver Class: org.h2.Driver 
+JDBC URL: jdbc:h2:mem:testdb 
+User Name: sa 
+password: password 
 
 # ENDPOINTS
 running on the URL http://localhost with port 8080 ( http://localhost:8080/api/v1 ) 
