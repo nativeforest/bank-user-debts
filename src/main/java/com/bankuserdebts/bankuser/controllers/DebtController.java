@@ -40,7 +40,8 @@ public class DebtController {
     @RequestBody Integer amount) {
      //System.out.println("bankId: " + bankId+ "userId: " + userId +"amount: " + amount);
     // return new Debt();
-    return debtService.updateDebtById( bankId,  userId);
+
+    return debtService.updateDebtById( bankId,  userId, amount);
   }
 
   

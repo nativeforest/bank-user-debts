@@ -26,25 +26,30 @@ import lombok.Data;
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private long userId;
   private String name;
   private String email;
   private String password;
 
   @JsonIgnore
-  @ManyToMany(fetch = FetchType.LAZY,mappedBy = "usersBank", cascade = CascadeType.ALL)
+  @ManyToMany(
+    fetch = FetchType.LAZY,
+    mappedBy = "usersBank",
+    cascade = CascadeType.ALL
+    )
   private List<Bank> banks = new ArrayList<>();
   // findUsers By BanksId
 
   @JsonIgnore
   @OneToMany(mappedBy = "userDebt")
   private List<Debt> debts = new ArrayList<>();
+
   //GETTERS SETTERS
   public long getId() {
-    return id;
+    return userId;
   }
-  public void setId(long id){
-    this.id=id;
+  public void setId(long userId){
+    this.userId=userId;
 }
   public  String getName() {
     return name;

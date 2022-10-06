@@ -17,18 +17,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Debt {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private long debtId;
   private Integer amount;
   private String dateRegistered;
 
   @JsonIgnore
   @ManyToOne
-  @JoinColumn(name = "userId", nullable = false)
+  @JoinColumn(
+    name = "userId",
+    nullable = false
+    )
   private User userDebt;
 
   // @JsonIgnore
   @ManyToOne //(fetch = FetchType.LAZY)
-  @JoinColumn(name = "bankId", referencedColumnName = "id",nullable = false)
+  @JoinColumn(
+    name = "bankId",
+    referencedColumnName = "bankId",
+    nullable = false
+    )
   private Bank bank;
   
 //setters getters

@@ -48,7 +48,7 @@ public class BankService {
      
   }
   public List<Debt> getDebtsByBankId(long bankId) {
-    List<Debt> debts = debtRepository.findDebtsByBankId(bankId);
+    List<Debt> debts = debtRepository.findDebtsByBankBankId(bankId);
     return debts;
      
   }
@@ -56,7 +56,7 @@ public class BankService {
     if (!userRepository.existsById(userId)) {
       throw new RuntimeException("user not found");
     }
-    List<Bank> banks = bankRepository.findBanksByUsersBankId(userId);
+    List<Bank> banks = bankRepository.findBanksByUsersBankUserId(userId);
     return new ResponseEntity<>(banks, HttpStatus.OK);
   }
   

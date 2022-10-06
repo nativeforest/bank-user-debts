@@ -28,28 +28,34 @@ import lombok.Data;
 public class Bank {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private long bankId;
   private String name;
   
   @JsonIgnore
-  @ManyToMany(targetEntity = User.class, cascade = CascadeType.ALL)
+  @ManyToMany(
+    targetEntity = User.class,
+    cascade = CascadeType.ALL
+    )
   @JoinTable(
     name = "bankUser",
-    joinColumns =@JoinColumn(name="bankId"),
-    inverseJoinColumns=@JoinColumn(name="userId")
+    joinColumns =@JoinColumn(name="bankId",referencedColumnName = "bankId"),
+    inverseJoinColumns=@JoinColumn(name="userId",referencedColumnName = "userId")
     )
   private Set<User> usersBank = new HashSet<>();
 
   @JsonIgnore
-  @OneToMany(mappedBy = "bank", fetch = FetchType.LAZY)
+  @OneToMany(
+    mappedBy = "bank",
+    fetch = FetchType.LAZY
+    )
   private List<Debt> debts;
 
 // GETTERS SETTERS
 public long getId() {
-  return id;
+  return bankId;
 }
-public void setId(long id){
-        this.id=id;
+public void setId(long bankId){
+        this.bankId=bankId;
     }
   public String getName() {
     return name;

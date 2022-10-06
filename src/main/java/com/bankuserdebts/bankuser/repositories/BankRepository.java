@@ -14,7 +14,7 @@ import com.bankuserdebts.bankuser.models.Bank;
 @Repository
 public interface BankRepository extends JpaRepository<Bank, Long> {
   // List<Bank> findBanksByUserId(long userId);
-  List<Bank> findBanksByUsersBankId(long userId);
+  List<Bank> findBanksByUsersBankUserId(long userId);
   // findUsersByBanksId
 
 }

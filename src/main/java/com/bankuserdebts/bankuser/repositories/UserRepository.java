@@ -15,7 +15,7 @@ import com.bankuserdebts.bankuser.models.UserBank;
 public interface UserRepository extends JpaRepository<User, Long> {
   // @Query(value="SELECT B.ID,B.NAME FROM BANK_USER BU INNER JOIN BANKS B ON BU.bank_id=B.id WHERE BU.user_id=?1", nativeQuery=true)
   // public List<UserBank> findAllBanksByUserId(Long userId);
-  public List<User> findUsersByBanksId(final long bankId);
+  public List<User> findUsersByBanksBankId(final long bankId);
   //findTagsByTutorialsId()
 }
   

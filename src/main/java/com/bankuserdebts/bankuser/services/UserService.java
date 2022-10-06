@@ -52,7 +52,7 @@ public class UserService {
      if (!userRepository.existsById(bankId)) {
         throw new RuntimeException("Bank not found");
       }
-      List<User> users = userRepository.findUsersByBanksId(bankId);
+      List<User> users = userRepository.findUsersByBanksBankId(bankId);
       return new ResponseEntity<>(users, HttpStatus.OK);
       // return users;
   }

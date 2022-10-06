@@ -26,7 +26,7 @@ public class DebtService {
     return debtRepository.save(debt);
   }
   public List<Debt> getDebtsByBankId(long bankId) {
-    List<Debt> debts = debtRepository.findDebtsByBankId(bankId);
+    List<Debt> debts = debtRepository.findDebtsByBankBankId(bankId);
     return debts;
      
   }
@@ -34,7 +34,7 @@ public class DebtService {
     if (!debtRepository.existsById(userId)) {
       throw new RuntimeException("user not found");
     }
-    List<Debt> debts = debtRepository.findDebtsByUserDebtId(userId);
+    List<Debt> debts = debtRepository.findDebtByUserDebtUserId(userId);
     return new ResponseEntity<>(debts, HttpStatus.OK);
 
      
@@ -45,10 +45,13 @@ public class DebtService {
   public Debt updateDebt(Debt debt) {
     return debtRepository.save(debt);
   }
-  public Debt updateDebtById( long bankId, long userId) {
-    // Debt debt = debtRepository.findById(bankId).get();
-    List<Debt> debts = debtRepository.findDebtsByUserDebtId(userId);
+  public Debt updateDebtById( long bankId, long userId,Integer amount) {
+    Debt debt = debtRepository.findDebtsByUserDebtUserIdAndBankBankId(userId, bankId);
+    Integer newAmount = debt.getAmount() - amount;
+    debt.setAmount(newAmount);
+    return debtRepository.save(debt);
     // return debtRepository.save(debt);
-    return new Debt();
+    // return new Debt();
+    // return debt;
   }
 }
