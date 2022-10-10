@@ -1,19 +1,30 @@
 package com.bankuserdebts.bankuser;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.expression.Expression;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
 
+import com.bankuserdebts.bankuser.aop.TargetObject;
+import com.bankuserdebts.bankuser.autowiredList.AreaCalculatorService;
 import com.bankuserdebts.bankuser.models.Bank;
 import com.bankuserdebts.bankuser.models.Debt;
 import com.bankuserdebts.bankuser.models.User;
+import com.bankuserdebts.bankuser.profiles.EnviromentService;
 import com.bankuserdebts.bankuser.repositories.BankRepository;
 import com.bankuserdebts.bankuser.repositories.UserRepository;
+import com.bankuserdebts.bankuser.scopes.ScopeTest;
 import com.bankuserdebts.bankuser.services.BankService;
 import com.bankuserdebts.bankuser.services.DebtService;
 
-@SpringBootApplication
+@SpringBootApplication // == @Configuration + @EnableAutoConfiguration + @ComponentScan
 public class BankUserApplication implements CommandLineRunner {
 
 	@Autowired
@@ -84,9 +95,38 @@ public class BankUserApplication implements CommandLineRunner {
 		
 		System.out.println(":::::::DATA CREATED:::::::");
 	}
-
-	public static void main(String[] args) {
-		SpringApplication.run(BankUserApplication.class, args);
+	@Bean
+	public String getApplicationName() {
+		return "BankUserApplication";
 	}
+	public static void main(String[] args) {
+		// SpringApplication.run(BankUserApplication.class, args);
+		// logger.info("Hello {}",BankUserApplication.class);
+		ConfigurableApplicationContext context = SpringApplication.run(BankUserApplication.class, args);
+		EnviromentService env = context.getBean(EnviromentService.class);
+		System.out.println("active env:"+env.getEnviroment());
+		
+		ScopeTest scopeexample = context.getBean(ScopeTest.class);
+		ScopeTest scopeexample2 = context.getBean(ScopeTest.class);
+		logger.info("scopeexample: {}",scopeexample==scopeexample2);
+		
+		String applicationName = context.getBean("getApplicationName", String.class);
+		logger.info("scopeexample: {}",applicationName);
+
+		AreaCalculatorService areaCalculatorService = context.getBean(AreaCalculatorService.class);
+		logger.info("areaCalculatorService.calc area: {}",areaCalculatorService.getCalculateArea());
+
+		ExpressionParser eParser = new SpelExpressionParser()	;
+		Expression conc = eParser.parseExpression("'Hello World'.concat('!')");
+		Expression comp = eParser.parseExpression("8<6");
+		logger.info("comp: {}",comp.getValue());
+		logger.info("conc: {}",conc.getValue());
+
+		TargetObject targetObject = context.getBean(TargetObject.class);
+		targetObject.method1();
+
+	}
+
+	private static final Logger logger = LogManager.getLogger("HelloWorld");
 
 }
