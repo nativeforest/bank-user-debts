@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Order(1)
 public class MyAspect2 {
   //this method before will interecpt targetObject.method1()
-  @Before("PointCutExample.pointCutBridgeTest()")
+  @Before("PointCutExample.pointCutBridgeTest()") 
   public void before() {
     System.out.println("1 before method1");
     System.out.println("1 before interceptor");
